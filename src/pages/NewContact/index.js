@@ -1,5 +1,14 @@
+import Button from '../../components/Button';
+import ContactForm from '../../components/ContactForm';
+import Input from '../../components/Input';
+import PageHeader from '../../components/PageHeader';
+import Select from '../../components/Select';
+
 export default function NewContact() {
   return (
-    <h1>NewContact</h1>
+    <>
+      <PageHeader title="Novo Contato" />
+      <ContactForm buttonLabels="Cadastrar" />
+    </>
   );
 }
