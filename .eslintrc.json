@@ -24,6 +24,13 @@
       "react/react-in-jsx-scope" : "off",
       "linebreak-style" : "off",
       "import/prefer-default-export" : "off",
-      "no-unused-vars" : "off"
+      "no-unused-vars" : "off",
+      "react/jsx-no-bind": ["error", {
+        "ignoreDOMComponents": true,
+        "ignoreRefs": true,
+        "allowArrowFunctions": true,
+        "allowFunctions": true,
+        "allowBind": true
+      }]
     }
 }

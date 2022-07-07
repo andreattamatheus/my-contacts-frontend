@@ -36,3 +36,20 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+
+## Anotações
+
+Module Controlled Components
+
+React é One Way Data Binding
+Only sing of truth
+
+
+React and React DOM must know what any of them are doing
+That why we use useState
+
+Module Uncontrolled Components
+The page does not render again after update a variable
+
+We gonna use the useRef Hook. It can be used something to store information between rendering.
+And, make possible to get the value of the element without rendering the component again

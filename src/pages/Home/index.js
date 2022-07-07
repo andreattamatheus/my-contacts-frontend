@@ -8,6 +8,7 @@ import arrow from '../../assets/img/icons/arrow.svg';
 import trash from '../../assets/img/icons/trash.svg';
 import edit from '../../assets/img/icons/edit.svg';
 import Modal from '../../components/Modal';
+import Loader from '../../components/Loader';
 
 export default function Home() {
   return (
@@ -16,8 +17,8 @@ export default function Home() {
         <input type="text" placeholder="Pesquisar contato..." />
       </InputSearchContainer>
 
-      <Modal danger />
-
+      {/* <Modal danger /> */}
+      <Loader />
       <Header>
         <strong>3 Contatos</strong>
         <Link to="/new">
