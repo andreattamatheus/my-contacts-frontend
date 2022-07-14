@@ -53,3 +53,41 @@ The page does not render again after update a variable
 
 We gonna use the useRef Hook. It can be used something to store information between rendering.
 And, make possible to get the value of the element without rendering the component again
+
+
+
+
+### Entendendo a fetch API
+
+The fetch function only falls to catch on the (then and catch), if the connection isn't estabileshed with the url passed
+
+### Same Origin Policy (SOP)
+É uma ferramenta de segurança
+Basicamente é o sistema fazendo uma chamada para uma URL de mesma origem
+protocolo://dominio:porta
+
+Exemplo:
+Saída: http://localhost:3000
+Destino: http://localhost:3001
+
+CORS existe para flexibilizar O SOP. Permitindo ser feito o fetch para origens diferentes.
+
+
+### Simple vs Preflighted requests
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
+
+Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources.
+
+Grande maioria dos Headers tem prefixo de Access-Control
+
+Simple requests - One of the allowed methods:
+GET
+HEAD
+POST
+
+### Cacheando resultado do Preflight
+Access-Control-Max-Age -> coloca o tempo que vai cachear os headers
+
+
+### Fazendo o parse do body da response

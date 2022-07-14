@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { useEffect, useState } from 'react';
+
 import {
   Card, Container, Header, InputSearchContainer, ListContainer,
 } from './styles';
@@ -11,6 +13,19 @@ import Modal from '../../components/Modal';
 import Loader from '../../components/Loader';
 
 export default function Home() {
+  const [contacts, setContacts] = useState([{}]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/contacts')
+      .then(async (response) => {
+        const json = await response.json();
+        setContacts(json);
+      })
+      .catch((error) => {
+        console.log('erro', error);
+      });
+  }, []);
+
   return (
     <Container>
       <InputSearchContainer>
@@ -18,9 +33,12 @@ export default function Home() {
       </InputSearchContainer>
 
       {/* <Modal danger /> */}
-      <Loader />
+      {/* <Loader /> */}
       <Header>
-        <strong>3 Contatos</strong>
+        <strong>
+          {contacts.length}
+          {contacts.length === 1 ? ' contato' : ' contatos'}
+        </strong>
         <Link to="/new">
           Novo contato
         </Link>
@@ -33,44 +51,29 @@ export default function Home() {
             <img src={arrow} alt="" srcSet="" />
           </button>
         </header>
-
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Matheus Andreatta</strong>
-              <small>LinkedIn</small>
-            </div>
-            <span>contato@matheusandreatta.com.br</span>
-            <span>(27)99639-7187</span>
-          </div>
-          <div className="actions">
-            <a href="http://">
-              <img src={edit} alt="" srcSet="" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="" srcSet="" />
-            </button>
-          </div>
-        </Card>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Matheus Andreatta</strong>
-              <small>LinkedIn</small>
-            </div>
-            <span>contato@matheusandreatta.com.br</span>
-            <span>(27)99639-7187</span>
-          </div>
-          <div className="actions">
-            <a href="http://">
-              <img src={edit} alt="" srcSet="" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="" srcSet="" />
-            </button>
-          </div>
-        </Card>
       </ListContainer>
+
+      {contacts.map((contact) => (
+        <Card key={contact.id}>
+          <div className="info">
+            <div className="contact-name">
+              <strong>{contact.name}</strong>
+              {contact.category_name && (<small>{contact.category_name}</small>)}
+            </div>
+            <span>{contact.email}</span>
+            <span>{contact.phone}</span>
+          </div>
+          <div className="actions">
+            <a href={`edit/${contact.id}`}>
+              <img src={edit} alt="" srcSet="" />
+            </a>
+            <button type="button">
+              <img src={trash} alt="" srcSet="" />
+            </button>
+          </div>
+        </Card>
+      ))}
+
     </Container>
   );
 }
