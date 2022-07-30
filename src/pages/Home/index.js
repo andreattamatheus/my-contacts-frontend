@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import {
-  Card, Container, Header, InputSearchContainer, ListContainer,
+  Card, Container, Header, InputSearchContainer, ListHeader,
 } from './styles';
 
 import arrow from '../../assets/img/icons/arrow.svg';
@@ -14,9 +14,10 @@ import Loader from '../../components/Loader';
 
 export default function Home() {
   const [contacts, setContacts] = useState([{}]);
+  const [orderBy, setOrderBy] = useState('desc');
 
   useEffect(() => {
-    fetch('http://localhost:3001/contacts')
+    fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
         const json = await response.json();
         setContacts(json);
@@ -24,7 +25,11 @@ export default function Home() {
       .catch((error) => {
         console.log('erro', error);
       });
-  }, []);
+  }, [orderBy]);
+
+  function handleToggleOrderBy() {
+    setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
+  }
 
   return (
     <Container>
@@ -44,14 +49,12 @@ export default function Home() {
         </Link>
       </Header>
 
-      <ListContainer>
-        <header>
-          <button type="button">
-            <span>Nome</span>
-            <img src={arrow} alt="" srcSet="" />
-          </button>
-        </header>
-      </ListContainer>
+      <ListHeader orderBy={orderBy}>
+        <button type="button" onClick={handleToggleOrderBy}>
+          <span>Nome</span>
+          <img src={arrow} alt="" srcSet="" />
+        </button>
+      </ListHeader>
 
       {contacts.map((contact) => (
         <Card key={contact.id}>

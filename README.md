@@ -91,3 +91,18 @@ Access-Control-Max-Age -> coloca o tempo que vai cachear os headers
 
 
 ### Fazendo o parse do body da response
+
+
+
+
+### Trabalhando com async/await dentro do useEffect
+Quando usar o then e catch - ou quando usar async await
+
+Caso sua Promise, na parte debaixo, não dependa do código que vai ser executado, 
+não existe muitos motivos do porquê usar um async await.
+
+Não usar o useEffect com async. Motivos:
+1. Race condition
+
+
+useEffect - função de cleanup é executado quando componente é desmontado.
