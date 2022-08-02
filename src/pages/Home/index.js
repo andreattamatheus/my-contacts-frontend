@@ -13,8 +13,13 @@ import Modal from '../../components/Modal';
 import Loader from '../../components/Loader';
 
 export default function Home() {
-  const [contacts, setContacts] = useState([{}]);
+  const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('desc');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredContatcs = contacts.filter((contact) => (
+    contact.name.includes(searchTerm)
+  ));
 
   useEffect(() => {
     fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
@@ -27,6 +32,10 @@ export default function Home() {
       });
   }, [orderBy]);
 
+  function handleSearchTerm(event) {
+    setSearchTerm(event.target.value);
+  }
+
   function handleToggleOrderBy() {
     setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
   }
@@ -34,29 +43,35 @@ export default function Home() {
   return (
     <Container>
       <InputSearchContainer>
-        <input type="text" placeholder="Pesquisar contato..." />
+        <input
+          type="text"
+          placeholder="Pesquisar contato..."
+          onChange={handleSearchTerm}
+        />
       </InputSearchContainer>
 
       {/* <Modal danger /> */}
       {/* <Loader /> */}
       <Header>
         <strong>
-          {contacts.length}
-          {contacts.length === 1 ? ' contato' : ' contatos'}
+          {filteredContatcs.length}
+          {filteredContatcs.length === 1 ? ' contato' : ' contatos'}
         </strong>
         <Link to="/new">
           Novo contato
         </Link>
       </Header>
 
-      <ListHeader orderBy={orderBy}>
-        <button type="button" onClick={handleToggleOrderBy}>
-          <span>Nome</span>
-          <img src={arrow} alt="" srcSet="" />
-        </button>
-      </ListHeader>
+      {filteredContatcs.length > 0 && (
+        <ListHeader orderBy={orderBy}>
+          <button type="button" onClick={handleToggleOrderBy}>
+            <span>Nome</span>
+            <img src={arrow} alt="" srcSet="" />
+          </button>
+        </ListHeader>
+      )}
 
-      {contacts.map((contact) => (
+      {filteredContatcs.map((contact) => (
         <Card key={contact.id}>
           <div className="info">
             <div className="contact-name">
