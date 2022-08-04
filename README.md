@@ -98,7 +98,7 @@ Access-Control-Max-Age -> coloca o tempo que vai cachear os headers
 ### Trabalhando com async/await dentro do useEffect
 Quando usar o then e catch - ou quando usar async await
 
-Caso sua Promise, na parte debaixo, não dependa do código que vai ser executado, 
+Caso sua Promise, na parte debaixo, não dependa do código que vai ser executado,
 não existe muitos motivos do porquê usar um async await.
 
 Não usar o useEffect com async. Motivos:
@@ -106,3 +106,11 @@ Não usar o useEffect com async. Motivos:
 
 
 useEffect - função de cleanup é executado quando componente é desmontado.
+
+
+
+### Melhoria de UX com status de loading
+Usar o ao setar states como de Loadings e afins, para evitar ter a renderização a mais.
+Qualquer dúvida, rever a aula.
+
+Fetch API só cai no catch, caso tenha problema em conectar com o servidor.
