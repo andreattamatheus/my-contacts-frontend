@@ -5,6 +5,7 @@
     },
     "extends": [
         "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
         "airbnb"
     ],
     "parserOptions": {
@@ -15,7 +16,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
       "react/jsx-filename-extension": [
@@ -33,6 +35,9 @@
         "allowArrowFunctions": true,
         "allowFunctions": true,
         "allowBind": true
-      }]
+      }],
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "class-methods-use-this": "off"
     }
 }
