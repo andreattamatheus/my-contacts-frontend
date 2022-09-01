@@ -95,7 +95,7 @@ Access-Control-Max-Age -> coloca o tempo que vai cachear os headers
 
 
 
-### Melhoria de UX com status de loading
+ ### Melhoria de UX com status de loading
 Usar o ao setar states como de Loadings e afins, para evitar ter a renderização a mais.
 Qualquer dúvida, rever a aula.
 
@@ -118,3 +118,13 @@ Não usar o useEffect com async. Motivos:
 useEffect - função de cleanup é executado quando componente é desmontado.
 
 Podemos criar um async/await dentro do useEffect para usar eles.
+
+
+
+### useMemo vs useCallback: analisando o código fonte do React
+
+useMemo - guardar valores
+ele executa a função no seu update
+
+useCallback - guardar funções
+ele não executa a função no seu update
